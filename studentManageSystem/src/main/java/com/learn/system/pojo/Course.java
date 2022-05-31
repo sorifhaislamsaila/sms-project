@@ -1,6 +1,7 @@
 package com.learn.system.pojo;
 
 public class Course {
+
     String courseNo;
     String courseName;
     int credit;

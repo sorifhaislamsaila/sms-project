@@ -1,6 +1,7 @@
 package com.learn.system.pojo;
 
 public class Account {
+
     Integer id;
     String username;
     String password;

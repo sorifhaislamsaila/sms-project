@@ -1,5 +1,6 @@
 package com.learn.system.pojo;
 
+//这个是用于连接查询的pojo
 public class Score {
     String stuNo;
     String courseNo;
