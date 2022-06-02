@@ -23,6 +23,26 @@
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
     <script src="/js/bootstrap.js"></script>
+
+
+    <style type="text/css">
+        .col-md-2{
+            /*width: 50px;*/
+            flex: 0 0 8.333333%;
+            max-width: 8.333333%;
+
+        }
+
+        .col-md-8{
+            flex: 0 0 83.333333%;
+            max-width: 83.333333%
+        }
+
+
+
+
+    </style>
+
 </head>
 <body>
 
@@ -48,7 +68,7 @@
     <div class="row" >
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="text-align: center">
                 <tr>
                     <td>
                         <span>学号：</span><span th:text="${stu.stuNo}"></span>
