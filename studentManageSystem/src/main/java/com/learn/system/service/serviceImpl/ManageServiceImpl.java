@@ -49,11 +49,6 @@ public class ManageServiceImpl implements ManageService {
 
     @Override
     public void deleteStuByNo(String stuNo) {
-        //删除成绩表
-        deleteScoreByNo(stuNo);
-        //班级人数减一
-        updateClassNumM(manageMapper.queryClassNoByStuNo(stuNo));
-        //最后删除学生信息
         manageMapper.deleteStuByNo(stuNo);
     }
 
