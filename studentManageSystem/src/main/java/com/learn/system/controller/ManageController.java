@@ -85,7 +85,7 @@ public class ManageController {
         } else {
             //将生日字符串转换成date类型
             SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = new Date(simple.parse(birthday).getTime());
+            Date date = new java.sql.Date(simple.parse(birthday).getTime());
             Student stu = new Student(stuNo, stuName, sex,date, nat, classNo);
             manageService.insertStudentInfo(stu);
             mv.addObject("success", 1);
@@ -94,6 +94,39 @@ public class ManageController {
         return mv;
     }
 
+    //deleteStu显示函数
+    @RequestMapping(value="/deleteStu/{pageNum}" , method = RequestMethod.GET)
+    public ModelAndView deleteStu(@PathVariable(value="pageNum")int pageNum,
+                                  ModelAndView mv, HttpSession session){
+        mv.addObject("userType", session.getAttribute("userType"));
+        mv.addObject("userName", session.getAttribute("stuNo"));
+        int offset = 5;     //每页显示的数量
+        int total = manageService.queryAllStudent().size(); //学生信息总数
+        int totalPage = total/offset;
+        if(total%offset !=0){
+            totalPage++;
+        }
+        if(totalPage == 0){
+            totalPage=1;
+        }
+        mv.addObject("totalPage", totalPage);
+        mv.addObject("pageNum", pageNum);
+        List<Student> studentList = new ArrayList<Student>();
+        studentList = manageService.querySomeStudent(manageService.queryAllStudent(),
+                pageNum, offset);
+        mv.addObject("studentList", studentList);
+        mv.setViewName("deleteStu");
+        return mv;
+    }
+
+    //删除函数
+    @RequestMapping(value = "/delete/{stuNo}", method = RequestMethod.GET)
+    public ModelAndView delete(@PathVariable("stuNo")String stuNo,
+                               ModelAndView mv, HttpSession session){
+        manageService.deleteStuByNo(stuNo);
+        mv.setViewName("redirect:/deleteStu/1"); //转发请求
+        return mv;
+    }
 
 
 }
